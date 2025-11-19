@@ -1,0 +1,23 @@
+<!--INICIA TABLA-->
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Correo</th>
+          <th scope="col">numero</th>
+          <th scope="col">contraseña</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of agendaList; track item._id){
+        <tr>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.correo }}</td>
+          <td>{{ item.numero }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <!--TERMINA TABLA-->
