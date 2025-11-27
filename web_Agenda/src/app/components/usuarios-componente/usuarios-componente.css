@@ -1,0 +1,16 @@
+th {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+th, td{
+    background-color: aqua;
+}
+
+.crearUsuario{
+    display:contents;
+}
+.crearUsuario hr{
+border: none;
+}
+.crearUsuario label{
+    display:grid;
+}
