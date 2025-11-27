@@ -1,23 +1,105 @@
-<!--INICIA TABLA-->
-  <div class="table-responsive">
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Nombre</th>
-          <th scope="col">Correo</th>
-          <th scope="col">numero</th>
-          <th scope="col">contraseña</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of agendaList; track item._id){
-        <tr>
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.correo }}</td>
-          <td>{{ item.numero }}</td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-  <!--TERMINA TABLA-->
+<h2>Agenda</h2>
+
+<h3>Crear nuevo evento</h3>
+
+<label>Nombre:</label>
+<input type="text" [(ngModel)]="nuevo.nombre" required>
+
+<label>Descripción:</label>
+<input type="text" [(ngModel)]="nuevo.descripcion">
+
+<label>Tipo:</label>
+<select [(ngModel)]="nuevo.tipo">
+  <option value="personal">Personal</option>
+  <option value="trabajo">Trabajo</option>
+  <option value="estudio">Estudio</option>
+  <option value="otro">Otro</option>
+</select>
+
+<label>Fecha inicio:</label>
+<input type="date" [(ngModel)]="nuevo.fechaInicio" required>
+
+<label>Fecha fin:</label>
+<input type="date" [(ngModel)]="nuevo.fechaFin">
+
+<label>
+  <input type="checkbox" [(ngModel)]="nuevo.cooperativo">
+  Es cooperativo
+</label>
+
+<label>
+  <input type="checkbox" [(ngModel)]="nuevo.recordatorio">
+  Activar recordatorio
+</label>
+
+<button (click)="guardar()">Guardar</button>
+
+<hr>
+
+<h3>Lista de eventos</h3>
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Tipo</th>
+    <th>Inicio</th>
+    <th>Fin</th>
+    <th>Coop.</th>
+    <th>Rec.</th>
+    <th>Acciones</th>
+  </tr>
+
+  <tr *ngFor="let item of lista">
+    <td>{{ item.nombre }}</td>
+    <td>{{ item.descripcion }}</td>
+    <td>{{ item.tipo }}</td>
+    <td>{{ item.fechaInicio | date }}</td>
+    <td>{{ item.fechaFin | date }}</td>
+    <td>{{ item.cooperativo ? 'Sí' : 'No' }}</td>
+    <td>{{ item.recordatorio ? 'Sí' : 'No' }}</td>
+
+    <td>
+      <button (click)="seleccionar(item)">Editar</button>
+      <button (click)="eliminar(item._id)">Eliminar</button>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<div *ngIf="editando">
+  <h3>Editando evento</h3>
+
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="editando.nombre">
+
+  <label>Descripción:</label>
+  <input type="text" [(ngModel)]="editando.descripcion">
+
+  <label>Tipo:</label>
+  <select [(ngModel)]="editando.tipo">
+    <option value="personal">Personal</option>
+    <option value="trabajo">Trabajo</option>
+    <option value="estudio">Estudio</option>
+    <option value="otro">Otro</option>
+  </select>
+
+  <label>Fecha inicio:</label>
+  <input type="date" [(ngModel)]="editando.fechaInicio">
+
+  <label>Fecha fin:</label>
+  <input type="date" [(ngModel)]="editando.fechaFin">
+
+  <label>
+    <input type="checkbox" [(ngModel)]="editando.cooperativo">
+    Es cooperativo
+  </label>
+
+  <label>
+    <input type="checkbox" [(ngModel)]="editando.recordatorio">
+    Activar recordatorio
+  </label>
+
+  <button (click)="actualizar()">Actualizar</button>
+  <button (click)="editando = null">Cancelar</button>
+</div>
